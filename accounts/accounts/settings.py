@@ -24,8 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = 'django-insecure-@-cw3vzw_f6$ekqnbm38oost*tt04n1o@8g4)mok)x_)^q1pq2'
 
 # stock_project secret key
-SECRET_KEY = 'django-insecure-oh7iw+43ubqp%21+)wb4uc)s%76&i(^qd2k0x@v0oeds=tm0n&'
-
+SECRET_KEY = 'django-insecure-0-8kqmh1y+8n_5_)vmr90)g7g+c5_*=yzmyo9h=&gog5nqlrxr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,11 +84,11 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': "PostgreSQL 17",
+        'NAME': "mydb",
 
-        'USER': "postgres",
+        'USER': "test",
 
-        'PASSWORD': "Sabrina2307",
+        'PASSWORD': "mypassword",
 
         'HOST': "localhost",
 

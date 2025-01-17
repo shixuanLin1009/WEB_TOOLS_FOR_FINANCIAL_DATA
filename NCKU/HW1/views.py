@@ -5,7 +5,18 @@ import pandas as pd
 import talib
 from .utils.hw2 import stockCrawing
 from .utils.hw3 import stockCrawing as stockCrawingV3
+from django.contrib import messages
+from django.shortcuts import render, redirect
+
 # Create your views here.
+
+def form(request):
+    print("JJJ")
+    if not request.user.is_authenticated:
+        messages.success(request, 'Sorry! Please Log In.')
+        return redirect("http://127.0.0.1:8080/account/login")
+    return render(request, 'HW3_1.html')
+
 def HW1(request):
     return render(request, 'HW1.html') # 這裡是將
 
