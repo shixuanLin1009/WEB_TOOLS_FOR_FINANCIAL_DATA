@@ -25,7 +25,7 @@ def sign_up(request):
 def log_out(request):
     logout(request)
     messages.success(request, 'You are logged out.')
-    return redirect('http://127.0.0.1:8080/account/login/')
+    return redirect('http://127.0.0.1:8080/account/login')
 
 
 @csrf_exempt
@@ -41,7 +41,7 @@ def sign_in(request):
             login(request, user)
             messages.success(request, 'You are now logged in.')
 
-            return redirect("http://127.0.0.1:8000/HW3_1/")
+            return redirect("http://127.0.0.1:8000/HW1/")
         else:
             messages.warning(request, 'Invalid login credentials')
             return redirect('/account/login' )

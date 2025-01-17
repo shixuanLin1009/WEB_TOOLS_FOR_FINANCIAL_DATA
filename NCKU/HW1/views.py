@@ -15,7 +15,7 @@ def form(request):
     if not request.user.is_authenticated:
         messages.success(request, 'Sorry! Please Log In.')
         return redirect("http://127.0.0.1:8080/account/login")
-    return render(request, 'HW3_1.html')
+    return render(request, 'HW1.html')
 
 def HW1(request):
     return render(request, 'HW1.html') # 這裡是將
