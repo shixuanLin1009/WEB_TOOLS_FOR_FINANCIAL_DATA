@@ -8,6 +8,13 @@
 <script>
   csrf_token = "{{ csrf_token }}";
 </script>
+<div>
+  <a href="{% url 'HW3_1' %}">HW3_1</a>
+  <a href="{% url 'HW1' %}">HW1</a>
+  <a href="{% url 'HW2' %}">HW2</a>
+  <a href="{% url 'HW3_3' %}">HW3_3</a>
+  <a href="{% url 'HW3_2' %}">HW3_2</a>
+</div>
 
 <button type="button" id="searchButton" onclick="search()">Submit</button>
 <input type="text" id="stock" value="1301" />
