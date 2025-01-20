@@ -1,13 +1,47 @@
 services:
-  database:
-    image: percona
+  db:
+    container_name: "postgres"
+    image: postgres
     environment:
-      MYSQL_ROOT_PASSWORD: pass
-      MYSQL_DATABASE: some
-
-  phpmyadmin:
-    image: phpmyadmin
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_USER: test # Optional, can be customized
+      POSTGRES_DB: mydb # Optional, specify database name
     ports:
-      - 8080:80
-    links:
-      - database:db
+      - "5432:5432"
+      # (HOST:CONTAINER)
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    networks:
+      - app_network # Ensure db is accessible by the web and accounts containers
+  web:
+    build: ./app/NCKU/
+    command: python manage.py runserver 0.0.0.0:8000
+    restart: always
+    ports:
+      - "8000:8000"
+      # (HOST:CONTAINER)
+    volumes:
+      - .:/app # Mount the current directory to the /app directory inside the container
+    depends_on:
+      - db
+    networks:
+      - app_network
+  accounts:
+    build: ./app/accounts/
+    command: python manage.py runserver 0.0.0.0:8001
+    restart: always
+    ports:
+      - "8001:8001"
+      # (HOST:CONTAINER)
+    volumes:
+      - .:/app # Mount the current directory to the /app directory inside the container
+    depends_on:
+      - db
+    networks:
+      - app_network
+volumes:
+  pgdata: # Persistent volume for PostgreSQL data
+
+networks:
+  app_network: # Custom network for communication between containers
+    driver: bridge

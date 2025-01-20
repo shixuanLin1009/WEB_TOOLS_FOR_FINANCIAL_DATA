@@ -1,14 +1,15 @@
-# Use the official Python image from the DockerHub
-FROM continuumio/miniconda3:main
-ENV PYTHONUNBUFFERED = 2
-WORKDIR /workdir
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
-RUN yes | pip install psycopg2-binary
+FROM arm64v8/python:3
 
-# Copy the current directory contents into the container at /app
-COPY . /workdir
+
+WORKDIR /
+
+COPY requirements.txt /
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
 EXPOSE 8001
 
-# Specify the command to run on container start
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8001"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
