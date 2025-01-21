@@ -42,7 +42,7 @@ def create_table():
 
             'HOST': "localhost",
 
-            'PORT': "5432"
+            'PORT': "5433"
         }
     }
 
@@ -96,7 +96,7 @@ def insert_row_data(user_name_var, stock_inductor_var, start_date_inductor_var, 
 
             'HOST': "localhost",
 
-            'PORT': "5432"
+            'PORT': "5433"
         }
     }
 
@@ -153,7 +153,7 @@ def delete_row_data(user_name_var, stock_inductor_var, start_date_inductor_var, 
 
             'HOST': "localhost",
 
-            'PORT': "5432"
+            'PORT': "5433"
         }
     }
 
@@ -218,7 +218,7 @@ def fetch():
 
             'HOST': "localhost",
 
-            'PORT': "5432"
+            'PORT': "5433"
         }
     }
 
@@ -260,7 +260,7 @@ def delete_row_by_id(row_id):
             'USER': "test",
             'PASSWORD': "mypassword",
             'HOST': "localhost",
-            'PORT': "5432"
+            'PORT': "5433"
         }
     }
 

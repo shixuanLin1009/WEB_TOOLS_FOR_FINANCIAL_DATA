@@ -54,14 +54,14 @@ $(document).ready(function () {
   $("#submitButton").click(function () {
     console.log("456");
     // 獲取輸入值
-    // const stock = $("#stockInductor").val().trim();
-    // const startDate = $("#startDateInductor").val();
-    // const endDate = $("#endDateInductor").val();
-    // const d = parseFloat($("#d_num").val());
-    const stock = "AAPL";
-    const startDate = "2024-1-1";
-    const endDate = "2025-1-10";
-    const d = 1;
+    const stock = $("#stockInductor").val().trim();
+    const startDate = $("#startDateInductor").val();
+    const endDate = $("#endDateInductor").val();
+    const d = parseFloat($("#d_num").val());
+    // const stock = "AAPL";
+    // const startDate = "2024-1-1";
+    // const endDate = "2025-1-10";
+    // const d = 1;
     //   // 驗證輸入是否有效
     //   if (!stock || !startDate || !endDate || !d) {
     //     $("#result").text("Please fill in all fields");
