@@ -5,8 +5,19 @@ import pandas as pd
 import talib
 from .utils.hw2 import stockCrawing
 from .utils.hw3 import stockCrawing as stockCrawingV3
+from .utils.email import send_email
+from django.contrib import messages
+from django.shortcuts import render, redirect
 from .utils.hw5 import Technical_Indicators
 # Create your views here.
+
+def form(request):
+    print("JJJ")
+    if not request.user.is_authenticated:
+        messages.success(request, 'Sorry! Please Log In.')
+        return redirect("http://127.0.0.1:8080/account/login")
+    return render(request, 'HW1.html')
+
 def HW1(request):
     return render(request, 'HW1.html') # 這裡是將
 
@@ -18,6 +29,9 @@ def HW3_1(request):
 
 def HW3_3(request):
     return render(request, 'HW3_3.html')
+
+# def render_Track_list(request):
+#     return render(request, 'Track_list.html')
 
 def showStock(symbol="AAPL", start="2024-12-1", end="2025-1-10",interval="1d"):
     df = pd.DataFrame(yf.download(symbol, start=start, end=end, interval=interval))
@@ -97,8 +111,50 @@ def ajax_HW3_3(request):
     
     indicators=Technical_Indicators(stock, start, end, interval)
     response = indicators.run()
+
+    send_email("沒有訊號", "sabrina22307@gmail.com")
+
     print("response success")
     return JsonResponse(response, json_dumps_params={'ensure_ascii': False, 'indent': 4}, safe=False) # 這裡是將 response 這個字典回傳給使用者
+
+from NCKU.table_data_edit import insert_row_data
+def insert_track_data(request):
+    # Extract data from the POST request
+    user_name_var = request.POST.get('user_name_var')
+    stock_inductor_var = request.POST.get('stock_inductor_var')
+    start_date_inductor_var = request.POST.get('start_date_inductor_var')
+    end_date_inductor_var = request.POST.get('end_date_inductor_var')
+    d_var = request.POST.get('d_var')
+    print(user_name_var,stock_inductor_var,start_date_inductor_var,end_date_inductor_var,d_var)
+    insert_row_data(user_name_var, stock_inductor_var, start_date_inductor_var, end_date_inductor_var, d_var)
+    return JsonResponse({'user_name': user_name_var})
+
+from NCKU.table_data_edit import fetch
+def Track_list(request):
+    # Fetch the data (DataFrame)
+    df = fetch()
+    
+    # Convert the DataFrame to a list of dictionaries (records)
+    df_records = df.to_dict(orient='records')
+
+    # Render the Track_list.html template and pass the df records to the template
+    return render(request, 'Track_list.html', {'data': df_records})
+
+from NCKU.table_data_edit import delete_row_data
+def delete_track_data(request):
+    if request.method == "POST":
+        user_name_var = request.POST.get("user_name_var")
+        stock_inductor_var = request.POST.get("stock_inductor_var")
+        start_date_inductor_var = request.POST.get("start_date_inductor_var")
+        end_date_inductor_var = request.POST.get("end_date_inductor_var")
+        d_var = request.POST.get("d_var")
+
+        # Call the delete function from Bcell.table_data_edit
+        delete_row_data(user_name_var, stock_inductor_var, start_date_inductor_var, end_date_inductor_var, d_var)
+
+        # Return a success response
+        return JsonResponse({"status": "success"})
+    return JsonResponse({"status": "failed"})
 
 
 

@@ -112,3 +112,13 @@ button:disabled {
   margin-top: 10px;
   color: #555;
 }
+#addtrackButton {
+  padding: 10px 20px;
+  border: none;
+  background-color: #1f720d;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  height: 40px;
+}
