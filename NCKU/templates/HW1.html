@@ -1,7 +1,11 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
+
+{% extends "base.html" %}
+<!-- {% block title %} HW3 {% endblock %}  -->
+{% block content %}
+{% load static %}
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -71,4 +75,7 @@
     </div>
     <script src="{% static 'js/HW1.js' %}"></script>
   </body>
+
+{% endblock %}
+
 </html>

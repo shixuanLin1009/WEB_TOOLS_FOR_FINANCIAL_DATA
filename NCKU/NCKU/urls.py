@@ -15,22 +15,27 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from sum import views as sum_view
 from HW1 import views as HW1_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('sum/', sum_view.sum),
-    path('HW1/', HW1_view.HW1 , name='HW1'),
-    path('HW2/', HW1_view.HW2, name='HW2'),
-    path('HW3_1/', HW1_view.HW3_1, name='HW3_1'),
-    path('HW3_3/', HW1_view.HW3_3, name='HW3_3'),
+    # path('HW1/', HW1_view.HW1),
+    # path('HW1/', include('HW1')),
+    path('HW1/', include('HW1.urls')),
+    path('HW2/', HW1_view.HW2),
+    path('HW3_1/', HW1_view.HW3_1),
+    path('HW3_3/', HW1_view.HW3_3),
+    path('Track_list/', HW1_view.Track_list),
     path('ajax_sum/', sum_view.ajax_sum),
     path('ajax_showStock/', HW1_view.ajax_showStock),
     path('ajax_stockprice/', HW1_view.ajax_HW2),
     path('ajax_PER/', HW1_view.ajax_HW3_1),
     path('ajax_index/', HW1_view.ajax_HW3_3),
-    path('HW3_2/', HW1_view.day3, name='HW3_2'),
+    path('insert-track-data/', HW1_view.insert_track_data),
+    path('delete-track-data/', HW1_view.delete_track_data),
+    path('HW3_2/', HW1_view.day3),
     path('ajax_day3/', HW1_view.day3_result),
 ]
