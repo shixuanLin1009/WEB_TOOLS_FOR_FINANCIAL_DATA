@@ -1,8 +1,0 @@
-Django==5.1.4
-numpy==2.2.2
-pandas==2.2.3
-selenium==4.27.1
-#ta_lib==0.6.1
-twstock==1.4.0
-webdriver_manager==4.0.2
-yfinance==0.2.51
