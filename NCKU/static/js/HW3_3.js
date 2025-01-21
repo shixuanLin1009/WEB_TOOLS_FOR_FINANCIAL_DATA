@@ -1,14 +1,16 @@
 $(document).ready(function () {
-
-  $(document).ready(function() {
+  $(document).ready(function () {
     // Check if data exists in localStorage and populate the form
-    if (localStorage.getItem("username") && localStorage.getItem("stockInductor")) {
-        $("#stockInductor").val(localStorage.getItem("stockInductor"));
-        $("#startDateInductor").val(localStorage.getItem("startDateInductor"));
-        $("#endDateInductor").val(localStorage.getItem("endDateInductor"));
-        $("#d_num").val(localStorage.getItem("d"));
+    if (
+      localStorage.getItem("username") &&
+      localStorage.getItem("stockInductor")
+    ) {
+      $("#stockInductor").val(localStorage.getItem("stockInductor"));
+      $("#startDateInductor").val(localStorage.getItem("startDateInductor"));
+      $("#endDateInductor").val(localStorage.getItem("endDateInductor"));
+      $("#d_num").val(localStorage.getItem("d"));
     }
-});
+  });
 
   $("#example").DataTable({
     responsive: true,
@@ -19,46 +21,47 @@ $(document).ready(function () {
   });
 
   $("#addtrackButton").click(function () {
-      console.log("123");
-      var user_name_var = 'test';
-      var stock_inductor_var = document.getElementById("stockInductor").value;
-      var start_date_inductor_var = document.getElementById("startDateInductor").value;
-      var end_date_inductor_var = document.getElementById("endDateInductor").value;
-      var d_var = document.getElementById("d_num").value;
-      console.log(start_date_inductor_var);
-      $.ajax({
-          headers: { 'X-CSRFToken': csrf_token },
-          method: 'POST',
-          url: '/insert-track-data/',
-          dataType: 'json',
-          data: {
-              'user_name_var': user_name_var,
-              'stock_inductor_var': stock_inductor_var,
-              'start_date_inductor_var': start_date_inductor_var,
-              'end_date_inductor_var': end_date_inductor_var,
-              'd_var': d_var
-          },
-          success: function (response) {
-              alert('Add Track sucessfully.')
-          },
-          error: function () {
-              alert('Something went wrong.');
-          }
-      });
+    console.log("123");
+    var user_name_var = "test";
+    var stock_inductor_var = document.getElementById("stockInductor").value;
+    var start_date_inductor_var =
+      document.getElementById("startDateInductor").value;
+    var end_date_inductor_var =
+      document.getElementById("endDateInductor").value;
+    var d_var = document.getElementById("d_num").value;
+    console.log(start_date_inductor_var);
+    $.ajax({
+      headers: { "X-CSRFToken": csrf_token },
+      method: "POST",
+      url: "/insert-track-data/",
+      dataType: "json",
+      data: {
+        user_name_var: user_name_var,
+        stock_inductor_var: stock_inductor_var,
+        start_date_inductor_var: start_date_inductor_var,
+        end_date_inductor_var: end_date_inductor_var,
+        d_var: d_var,
+      },
+      success: function (response) {
+        alert("Add Track sucessfully.");
+      },
+      error: function () {
+        alert("Something went wrong.");
+      },
+    });
   });
-
 
   $("#submitButton").click(function () {
     console.log("456");
     // 獲取輸入值
-    // const stock = $("#stockInductor").val().trim();
-    // const startDate = $("#startDateInductor").val();
-    // const endDate = $("#endDateInductor").val();
-    // const d = parseFloat($("#d_num").val());
-    const stock = "AAPL";
-    const startDate = "2024-1-1";
-    const endDate = "2025-1-10";
-    const d = 1;
+    const stock = $("#stockInductor").val().trim();
+    const startDate = $("#startDateInductor").val();
+    const endDate = $("#endDateInductor").val();
+    const d = parseFloat($("#d_num").val());
+    // const stock = "AAPL";
+    // const startDate = "2024-1-1";
+    // const endDate = "2025-1-10";
+    // const d = 1;
     //   // 驗證輸入是否有效
     //   if (!stock || !startDate || !endDate || !d) {
     //     $("#result").text("Please fill in all fields");
@@ -173,6 +176,9 @@ function renderDataTable(dataObject) {
     ]);
   }
   // 繪製表格
+  if ($.fn.DataTable.isDataTable("#result")) {
+    $("#result").DataTable().clear().destroy();
+  }
   $("#result").empty();
   $("#result").DataTable({
     responsive: true,

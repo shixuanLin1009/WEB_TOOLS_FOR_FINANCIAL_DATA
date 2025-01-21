@@ -42,7 +42,7 @@ def create_table():
 
             'HOST': "postgres",
 
-            'PORT': "5432"
+            'PORT': "5433"
         }
     }
 
@@ -96,7 +96,7 @@ def insert_row_data(user_name_var, stock_inductor_var, start_date_inductor_var, 
 
             'HOST': "postgres",
 
-            'PORT': "5432"
+            'PORT': "5433"
         }
     }
 
@@ -153,7 +153,7 @@ def delete_row_data(user_name_var, stock_inductor_var, start_date_inductor_var, 
 
             'HOST': "postgres",
 
-            'PORT': "5432"
+            'PORT': "5433"
         }
     }
 
@@ -218,7 +218,7 @@ def fetch():
 
             'HOST': "postgres",
 
-            'PORT': "5432"
+            'PORT': "5433"
         }
     }
 
@@ -259,8 +259,8 @@ def delete_row_by_id(row_id):
             'NAME': "mydb",
             'USER': "test",
             'PASSWORD': "mypassword",
-            'HOST': "postgres",
-            'PORT': "5432"
+            'HOST': "localhost",
+            'PORT': "5433"
         }
     }
 
