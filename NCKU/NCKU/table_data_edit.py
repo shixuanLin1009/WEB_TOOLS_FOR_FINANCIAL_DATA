@@ -40,7 +40,7 @@ def create_table():
 
             'PASSWORD': "mypassword",
 
-            'HOST': "localhost",
+            'HOST': "postgres",
 
             'PORT': "5432"
         }
@@ -76,7 +76,7 @@ def create_table():
     cursor.close()
     conn.close()
 # example
-# create_table()
+create_table()
 
 
 
@@ -94,7 +94,7 @@ def insert_row_data(user_name_var, stock_inductor_var, start_date_inductor_var, 
 
             'PASSWORD': "mypassword",
 
-            'HOST': "localhost",
+            'HOST': "postgres",
 
             'PORT': "5432"
         }
@@ -151,7 +151,7 @@ def delete_row_data(user_name_var, stock_inductor_var, start_date_inductor_var, 
 
             'PASSWORD': "mypassword",
 
-            'HOST': "localhost",
+            'HOST': "postgres",
 
             'PORT': "5432"
         }
@@ -216,7 +216,7 @@ def fetch():
 
             'PASSWORD': "mypassword",
 
-            'HOST': "localhost",
+            'HOST': "postgres",
 
             'PORT': "5432"
         }
@@ -259,7 +259,7 @@ def delete_row_by_id(row_id):
             'NAME': "mydb",
             'USER': "test",
             'PASSWORD': "mypassword",
-            'HOST': "localhost",
+            'HOST': "postgres",
             'PORT': "5432"
         }
     }

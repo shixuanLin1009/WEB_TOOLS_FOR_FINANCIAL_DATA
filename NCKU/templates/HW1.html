@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
-{% extends "base.html" %}
-<!-- {% block title %} HW3 {% endblock %}  -->
-{% block content %}
-{% load static %}
+  {% extends "base.html" %}
+  <!-- {% block title %} HW3 {% endblock %}  -->
+  {% block content %} {% load static %}
 
   <head>
     <meta charset="UTF-8" />
@@ -14,13 +12,6 @@
     <link rel="stylesheet" href="{% static 'css/HW1.css' %}" />
   </head>
   <body>
-    <div>
-      <a href="{% url 'HW3_1' %}">HW3_1</a>
-      <a href="{% url 'HW1' %}">HW1</a>
-      <a href="{% url 'HW2' %}">HW2</a>
-      <a href="{% url 'HW3_3' %}">HW3_3</a>
-      <a href="{% url 'HW3_2' %}">HW3_2</a>
-    </div>
     <div id="container_input">
       <h3>Method</h3>
       <form id="inductorForm" onsubmit="return false;">
@@ -76,6 +67,5 @@
     <script src="{% static 'js/HW1.js' %}"></script>
   </body>
 
-{% endblock %}
-
+  {% endblock %}
 </html>
