@@ -22,6 +22,7 @@
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/stock/modules/accessibility.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script>csrf_token = "{{ csrf_token }}";</script>
     <link
       rel="stylesheet"
       href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css"
@@ -62,6 +63,7 @@
           </div>
         </div>
         <button type="submit" id="submitButton">Submit</button>
+        <button type="submit" id="addtrackButton">Add Track</button>
       </form>
       <!-- 隨便先寫的 -->
       <table class="result" id="result"></table>

@@ -22,6 +22,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <style>
+
+      #Track_Button {
+        margin-right: 20px; /* Adjust the value for the space you need */
+      }
+
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -100,7 +105,7 @@
           </a>
           
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            {% if request.user.is_authenticated %}
+            
 
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" style="color: white;" href="/HW1/">HW1</a>
@@ -117,6 +122,21 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" style="color: white;" href="/HW3_3/">HW3_3</a>
             </li>
+
+            {% if request.user.is_authenticated %}
+
+            <li>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="Track_Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Track
+                </button>
+                <div class="dropdown-menu" aria-labelledby="Track_Button">
+                  <a class="dropdown-item" href="http://127.0.0.1:8000/Track_list">Track List for day3_3</a>
+                  <a class="dropdown-item" href="http://127.0.0.1:8000/HW3_3">Strategy</a>
+                </div>
+              </div>
+            </li>
+
 
             <li>
               <div class="dropdown">
