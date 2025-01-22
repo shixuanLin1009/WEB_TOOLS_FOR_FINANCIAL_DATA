@@ -32,7 +32,7 @@ $(document).ready(function () {
           url: '/insert-track-data/',
           dataType: 'json',
           data: {
-              'user_name_var': user_name_var,
+              // 'user_name_var': user_name_var,
               'stock_inductor_var': stock_inductor_var,
               'start_date_inductor_var': start_date_inductor_var,
               'end_date_inductor_var': end_date_inductor_var,
@@ -51,19 +51,19 @@ $(document).ready(function () {
   $("#submitButton").click(function () {
     console.log("456");
     // 獲取輸入值
-    // const stock = $("#stockInductor").val().trim();
-    // const startDate = $("#startDateInductor").val();
-    // const endDate = $("#endDateInductor").val();
-    // const d = parseFloat($("#d_num").val());
-    const stock = "AAPL";
-    const startDate = "2024-1-1";
-    const endDate = "2025-1-10";
-    const d = 1;
-    //   // 驗證輸入是否有效
-    //   if (!stock || !startDate || !endDate || !d) {
-    //     $("#result").text("Please fill in all fields");
-    //     return;
-    //   }
+    const stock = $("#stockInductor").val().trim();
+    const startDate = $("#startDateInductor").val();
+    const endDate = $("#endDateInductor").val();
+    const d = parseFloat($("#d_num").val());
+    // const stock = "AAPL";
+    // const startDate = "2024-1-1";
+    // const endDate = "2025-1-10";
+    // const d = 1;
+      // 驗證輸入是否有效
+      if (!stock || !startDate || !endDate || !d) {
+        $("#result").text("Please fill in all fields");
+        return;
+      }
 
     // 組裝成物件
 
@@ -173,6 +173,11 @@ function renderDataTable(dataObject) {
     ]);
   }
   // 繪製表格
+
+  if ($.fn.DataTable.isDataTable("#result")) {
+    $("#result").DataTable().clear().destroy();
+  }
+
   $("#result").empty();
   $("#result").DataTable({
     responsive: true,

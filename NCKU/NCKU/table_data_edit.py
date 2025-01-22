@@ -191,20 +191,21 @@ def delete_row_data(user_name_var, stock_inductor_var, start_date_inductor_var, 
     conn.close()
 
 # example
-user_name_var = 'postgres'
-stock_inductor_var = 'AAPL'
-start_date_inductor_var = '2025-01-01'
-end_date_inductor_var = '2025-02-01'
-d_var = 10
-delete_row_data(user_name_var, stock_inductor_var, start_date_inductor_var, end_date_inductor_var, d_var)
+# user_name_var = 'postgres'
+# stock_inductor_var = 'AAPL'
+# start_date_inductor_var = '2025-01-01'
+# end_date_inductor_var = '2025-02-01'
+# d_var = 10
+# delete_row_data(user_name_var, stock_inductor_var, start_date_inductor_var, end_date_inductor_var, d_var)
 
 
 
 
 
 # 去track_table將所有column的數據全拿存成DataFrame
-def fetch():
+def fetch(request):
     # Database connection details (settings.py照搬)
+    current_user = request.user.username  
     DATABASES = {
         'default': {
 
@@ -236,7 +237,8 @@ def fetch():
 
 
     # Fetch and display the data from the table to verify
-    cursor.execute("SELECT * FROM track_table;")
+    query = "SELECT * FROM track_table WHERE username = %s;"
+    cursor.execute(query, (current_user,))
     rows = cursor.fetchall()
 
     # Convert the fetched data to a pandas DataFrame
@@ -247,7 +249,7 @@ def fetch():
     conn.close()
     return df
 # example
-print(fetch())
+# print(fetch())
 
 
 
@@ -299,3 +301,49 @@ def delete_row_by_id(row_id):
 # Close the cursor and connection
 # cursor.close()
 # conn.close()
+
+
+def fetch_auth_user():
+    # Database connection details
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': "mydb",
+            'USER': "test",
+            'PASSWORD': "mypassword",
+            'HOST': "localhost",
+            'PORT': "5432"
+        }
+    }
+
+    # Connect to the PostgreSQL database
+    conn = psycopg2.connect(
+        dbname=DATABASES['default']['NAME'],
+        user=DATABASES['default']['USER'],
+        password=DATABASES['default']['PASSWORD'],
+        host=DATABASES['default']['HOST'],
+        port=DATABASES['default']['PORT']
+    )
+    
+    # Create a cursor to interact with the database
+    cursor = conn.cursor()
+
+    # Fetch data from auth_user
+    cursor.execute("SELECT * FROM auth_user;")
+    rows = cursor.fetchall()
+
+    # Get column names dynamically
+    col_names = [desc[0] for desc in cursor.description]
+
+    # Convert the fetched data to a pandas DataFrame
+    df = pd.DataFrame(rows, columns=col_names)
+    
+    # Close the cursor and connection
+    cursor.close()
+    conn.close()
+
+    return df
+
+# Example: Print the `auth_user` table
+df_auth_user = fetch_auth_user()
+print(df_auth_user)

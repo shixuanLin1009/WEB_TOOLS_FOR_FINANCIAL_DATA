@@ -120,7 +120,8 @@ def ajax_HW3_3(request):
 from NCKU.table_data_edit import insert_row_data
 def insert_track_data(request):
     # Extract data from the POST request
-    user_name_var = request.POST.get('user_name_var')
+    # user_name_var = request.POST.get('user_name_var')
+    user_name_var = str(request.user)
     stock_inductor_var = request.POST.get('stock_inductor_var')
     start_date_inductor_var = request.POST.get('start_date_inductor_var')
     end_date_inductor_var = request.POST.get('end_date_inductor_var')
@@ -132,7 +133,7 @@ def insert_track_data(request):
 from NCKU.table_data_edit import fetch
 def Track_list(request):
     # Fetch the data (DataFrame)
-    df = fetch()
+    df = fetch(request)
     
     # Convert the DataFrame to a list of dictionaries (records)
     df_records = df.to_dict(orient='records')
@@ -143,7 +144,8 @@ def Track_list(request):
 from NCKU.table_data_edit import delete_row_data
 def delete_track_data(request):
     if request.method == "POST":
-        user_name_var = request.POST.get("user_name_var")
+        # user_name_var = request.POST.get("user_name_var")
+        user_name_var = str(request.user)
         stock_inductor_var = request.POST.get("stock_inductor_var")
         start_date_inductor_var = request.POST.get("start_date_inductor_var")
         end_date_inductor_var = request.POST.get("end_date_inductor_var")
