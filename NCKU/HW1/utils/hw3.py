@@ -17,6 +17,10 @@ class stockCrawing:
     def __init__(self,stock=2330,unit="MONTH"):
         self.stock = stock
         self.unit = unit
+        if __name__=='__main__':
+            self.cache_dir = 'cache'
+        else:
+            self.cache_dir = os.path.join('HW1','utils','cache')
     def getPERData(self):
         options = webdriver.ChromeOptions()
         prefs = {
@@ -54,8 +58,9 @@ class stockCrawing:
             #刪除不符合的行
             div_df  = div_df .dropna(subset=[10])  # 刪除包含 NA / NaN 的行
             div_df  = div_df .reset_index(drop=True)
-            PER_range.to_csv(os.path.join('cache', f'{self.stock}_PER_range_{self.unit}.csv'), index=False)
-            div_df.to_csv(os.path.join('cache', f'{self.stock}_PER_{self.unit}.csv'), index=False)
+             #cache_dir = os.path.join('HW1','utils','cache')
+            PER_range.to_csv(os.path.join(self.cache_dir, f'{self.stock}_PER_range_{self.unit}.csv'), index=False)
+            div_df.to_csv(os.path.join(self.cache_dir, f'{self.stock}_PER_{self.unit}.csv'), index=False)
             # df.insert(0, "Sheet", option.text)  # 加入 Sheet 名稱作為標記
             # all_data = pd.concat([all_data, df], ignore_index=True)
         except Exception as e:
@@ -98,7 +103,7 @@ class stockCrawing:
             div_df  = div_df .dropna(subset=[0])  # 刪除包含 NA / NaN 的行
             div_df  = div_df .reset_index(drop=True)
             print(div_df)
-            div_df.to_csv(os.path.join('cache', f'{self.stock}_OHLC_{self.unit}.csv'), index=False)
+            div_df.to_csv(os.path.join(self.cache_dir, f'{self.stock}_OHLC_{self.unit}.csv'), index=False)
             # df.insert(0, "Sheet", option.text)  # 加入 Sheet 名稱作為標記
             # all_data = pd.concat([all_data, df], ignore_index=True)
         except Exception as e:
@@ -126,20 +131,20 @@ class stockCrawing:
     def run(self):
         
         #cache_dir = os.path.join('HW1','utils','cache')
-        if __name__=='__main__':
-            cache_dir = 'cache'
-        else:
-            cache_dir = os.path.join('HW1','utils','cache')
+        # if __name__=='__main__':
+        #     cache_dir = 'cache'
+        # else:
+        #     cache_dir = os.path.join('HW1','utils','cache')
         # 如果快取資料夾不存在，則創建它
-        if not os.path.exists(cache_dir):
-            os.makedirs(cache_dir)
-        if not os.path.exists(os.path.join(cache_dir,f'{self.stock}_PER_{self.unit}.csv')):
+        if not os.path.exists(self.cache_dir):
+            os.makedirs(self.cache_dir)
+        if not os.path.exists(os.path.join(self.cache_dir,f'{self.stock}_PER_{self.unit}.csv')):
             self.getPERData()
-        PERData=pd.read_csv(os.path.join(cache_dir,f'{self.stock}_PER_{self.unit}.csv'))
-        PER_ratio=pd.read_csv(os.path.join(cache_dir,f'{self.stock}_PER_range_{self.unit}.csv'))
-        if not os.path.exists(os.path.join(cache_dir,f'{self.stock}_OHLC_{self.unit}.csv')):
+        PERData=pd.read_csv(os.path.join(self.cache_dir,f'{self.stock}_PER_{self.unit}.csv'))
+        PER_ratio=pd.read_csv(os.path.join(self.cache_dir,f'{self.stock}_PER_range_{self.unit}.csv'))
+        if not os.path.exists(os.path.join(self.cache_dir,f'{self.stock}_OHLC_{self.unit}.csv')):
             self.getOHLCData()
-        OHLCData=pd.read_csv(os.path.join(cache_dir,f'{self.stock}_OHLC_{self.unit}.csv'))
+        OHLCData=pd.read_csv(os.path.join(self.cache_dir,f'{self.stock}_OHLC_{self.unit}.csv'))
         
         
         PER_price=self.calPERPrice(PERData.iloc[0,4],PER_ratio['1'])
@@ -149,7 +154,7 @@ class stockCrawing:
         PER_ratio_list.append(EPS)
         
         for i in range(len(OHLCData['0'])):
-            value = OHLCData.loc[i, '0']
+            value =str( OHLCData.loc[i, '0'])
             if re.match(r'^\d{4}$', value):
                  OHLCData.loc[i, '0']=datetime(int(value),1,1).timestamp()*1000
             elif re.match(r'^\d{2}Q\d{2}$', value):
@@ -164,7 +169,7 @@ class stockCrawing:
                 OHLCData.loc[i, '0'] = datetime(year, month, 1).timestamp()*1000
          
         for i in range(len(PERData['0'])):
-            value = PERData.loc[i, '0']
+            value =str( PERData.loc[i, '0'])
             if re.match(r'^\d{4}$', value):
                  PERData.loc[i, '0']=datetime(int(value),1,1).timestamp()*1000
             elif re.match(r'^\d{2}Q\d{2}$', value):

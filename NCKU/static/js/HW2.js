@@ -1,12 +1,14 @@
 $(document).ready(function () {
   $("#btn_submit").click(function () {
-    // console.log("123");
+    console.log("123");
     const id = $("#id").val().trim();
+
     const year = parseFloat($("#year").val());
 
     const formData = {};
     formData.id = id;
     formData.year = year;
+
     console.log(formData);
     $.ajax({
       url: "/ajax_stockprice/",
@@ -63,7 +65,7 @@ function transformDataToSeries(jsonData, now_price) {
     data: [],
   }));
 
-  const global_max = Math.max(...Object.values(jsonData).flat())
+  const global_max = Math.max(...Object.values(jsonData).flat());
 
   for (const key in jsonData) {
     // 獲取對應的範圍數據
@@ -74,14 +76,14 @@ function transformDataToSeries(jsonData, now_price) {
     dynamicSeries[1].data.push(expensive - average); // 合理到昂貴價值區間
     dynamicSeries[0].data.push(global_max - expensive + 500); // 昂貴價值區間
   }
-  
+
   dynamicSeries.push({
     name: "最新價格",
     data: [], // 不顯示數據
     color: "black", // 黑色
     showInLegend: true, // 顯示在圖例中
   });
-  
+
   // 配置 Highcharts
   Highcharts.chart("container", {
     chart: {
@@ -96,7 +98,8 @@ function transformDataToSeries(jsonData, now_price) {
     },
     yAxis: {
       min: 0,
-      max: Math.max(now_price, Math.max(...Object.values(jsonData).flat())) + 500,
+      max:
+        Math.max(now_price, Math.max(...Object.values(jsonData).flat())) + 500,
       title: {
         text: "",
       },
@@ -258,28 +261,28 @@ function generateTable(data, containerId, headers) {
 // });
 
 // 填入資料
-function add_data_information(data, now_price){
-  $("#Guli_cheap").text(data['股利法'][0]);
-  $("#Guli_middle").text(data['股利法'][1]);
-  $("#Guli_expensive").text(data['股利法'][2]);
+function add_data_information(data, now_price) {
+  $("#Guli_cheap").text(data["股利法"][0]);
+  $("#Guli_middle").text(data["股利法"][1]);
+  $("#Guli_expensive").text(data["股利法"][2]);
   $("#Guli_current").text(now_price);
-  $("#Guli_cheap_price").text(data['股利法'][0]);
+  $("#Guli_cheap_price").text(data["股利法"][0]);
 
-  $("#HighLow_cheap").text(data['高低價法'][0]);
-  $("#HighLow_middle").text(data['高低價法'][1]);
-  $("#HighLow_expensive").text(data['高低價法'][2]);
+  $("#HighLow_cheap").text(data["高低價法"][0]);
+  $("#HighLow_middle").text(data["高低價法"][1]);
+  $("#HighLow_expensive").text(data["高低價法"][2]);
   $("#HighLow_current").text(now_price);
-  $("#HighLow_cheap_price").text(data['高低價法'][0]);
+  $("#HighLow_cheap_price").text(data["高低價法"][0]);
 
-  $("#Benjing_cheap").text(data['本淨比法'][0]);
-  $("#Benjing_middle").text(data['本淨比法'][1]);
-  $("#Benjing_expensive").text(data['本淨比法'][2]);
+  $("#Benjing_cheap").text(data["本淨比法"][0]);
+  $("#Benjing_middle").text(data["本淨比法"][1]);
+  $("#Benjing_expensive").text(data["本淨比法"][2]);
   $("#Benjing_current").text(now_price);
-  $("#Benjing_cheap_price").text(data['本淨比法'][0]);
+  $("#Benjing_cheap_price").text(data["本淨比法"][0]);
 
-  $("#Benyi_cheap").text(data['本益比法'][0]);
-  $("#Benyi_middle").text(data['本益比法'][1]);
-  $("#Benyi_expensive").text(data['本益比法'][2]);
+  $("#Benyi_cheap").text(data["本益比法"][0]);
+  $("#Benyi_middle").text(data["本益比法"][1]);
+  $("#Benyi_expensive").text(data["本益比法"][2]);
   $("#Benyi_current").text(now_price);
-  $("#Benyi_cheap_price").text(data['本益比法'][0]);
+  $("#Benyi_cheap_price").text(data["本益比法"][0]);
 }

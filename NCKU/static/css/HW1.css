@@ -6,8 +6,11 @@ body {
 #container_input {
   width: 80%; /* 表單寬度為螢幕寬度的 80% */
   margin: 0 auto; /* 將表單置中 */
+  margin-top: 50px; /* 與上方留出 50px 的空間 */
+  margin-bottom: 10px; /* 與下方留出 50px 的空間 */
   padding: 5px;
-  border-bottom: 1px solid #ddd; /* 僅底部加邊框 */
+  border-bottom: 1px solid black; /* 僅底部加邊框 */
+  border-radius: 5px;
   background-color: #f9f9f9;
   top: 0;
   left: 0;
@@ -51,6 +54,15 @@ button {
 button:disabled {
   background-color: #ccc;
 }
+.chart_div {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
 /* 添加頁面內容樣式 */
 .content {
   margin-top: 150px; /* 留出表單的高度空間 */
@@ -60,6 +72,9 @@ button:disabled {
 #container {
   height: 400px;
   min-width: 310px;
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
 }
 
 /* table */
@@ -71,6 +86,7 @@ button:disabled {
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  display: none;
 }
 
 #highVolumeTable {
@@ -85,7 +101,7 @@ button:disabled {
 }
 
 #highVolumeTable th {
-  background-color: #007bff;
+  background-color: rgb(106, 110, 113);
   color: white;
   font-weight: bold;
 }

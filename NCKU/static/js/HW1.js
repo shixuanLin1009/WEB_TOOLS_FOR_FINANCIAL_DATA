@@ -1,6 +1,7 @@
 $(document).ready(function () {
   $("#submitButton").click(function () {
     // 獲取輸入值
+    $(".table-container").css("display", "block");
     const stock = $("#stockInductor").val().trim();
     const startDate = $("#startDateInductor").val();
     const endDate = $("#endDateInductor").val();
@@ -19,6 +20,10 @@ $(document).ready(function () {
     formData.start_date = startDate;
     formData.end_date = endDate;
     formData.d = d;
+    // formData.stock = "AAPL";
+    // formData.start_date = "2024-01-01";
+    // formData.end_date = "2025-01-01";
+    // formData.d = 5;
     console.log(formData);
 
     // AJAX 請求
