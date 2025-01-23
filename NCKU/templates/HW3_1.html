@@ -21,16 +21,14 @@
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
 
 </head>
-
-<body style="background-color:rgb(112, 129, 130);">
-    
+<body>
     <div class="container">
         <h1>本益比河流圖</h1>
         <form onsubmit="return false;">
             <div class="form-row">
                 <div class="form-group">
                     <label for="id">股票代碼&名稱:</label>
-                    <input type="text" id="id" name="stock" value="2330">
+                    <input type="text" id="id" name="stock">
                 </div>
                 <div class="form-group">
                     <label for="range">選擇範圍:</label>
@@ -44,7 +42,7 @@
             <button id="btn_submit">搜尋</button>
         </form>
     </div>
-    <h2 class="result" >最新價格：<span id="result"></span></h2>
+    <div class="result" >最新價格：<span id="result"></span></div>
 
     <!-- 長條圖 -->
     
