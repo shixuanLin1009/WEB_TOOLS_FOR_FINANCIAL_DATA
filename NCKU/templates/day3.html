@@ -11,13 +11,36 @@
 <script>
   csrf_token = "{{ csrf_token }}";
 </script>
-
-<button type="button" id="searchButton" onclick="search()">Submit</button>
-<input type="text" id="stock" value="1301" />
-<input type="date" id="startDate" value="2023-01-01" />
-<input type="text" id="ma_type" value="sma" />
-<input type="number" id="ma_length" value="3" />
-<input type="text" id="method" value="method3" />
+<body>
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <button type="button" id="searchButton" onclick="search()">
+          Submit
+        </button>
+      </div>
+      <div class="col-md-4">
+        <input type="text" id="stock" value="1301" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <input type="date" id="startDate" value="2023-01-01" />
+      </div>
+      <div class="col-md-4">
+        <input type="text" id="ma_type" value="sma" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <input type="number" id="ma_length" value="3" />
+      </div>
+      <div class="col-md-4">
+        <input type="text" id="method" value="method3" />
+      </div>
+    </div>
+  </div>
+</body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
